@@ -140,7 +140,7 @@
 
 			<!-- Start Unpack zipkin user feature -->
 
-
+<!--
 			<plugin>
 				<groupId>com.googlecode.maven-download-plugin</groupId>
 				<artifactId>download-maven-plugin</artifactId>
@@ -160,6 +160,28 @@
 					</execution>
 				</executions>
 			</plugin>
+-->
+
+         <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+            <executions>
+               <execution>
+                  <phase>generate-resources</phase>
+                  <configuration>
+                     <tasks>
+                        <echo message="unzipping file" />
+                        <unzip src="liberty-opentracing-zipkintracer-1.2-sample.zip" dest="${project.build.directory}/zipkintracer/" />
+                     </tasks>
+                  </configuration>
+                  <goals>
+                     <goal>run</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+
+
 
 			<!-- End Unpack zipkin user feature -->
 
@@ -255,6 +277,18 @@
             <artifactId>microprofile-rest-client-api</artifactId>
             <version>1.0</version>
         </dependency>
+		<!-- Opentracing 1.2 -->
+    <dependency>
+      <groupId>org.eclipse.microprofile.opentracing</groupId>
+      <artifactId>microprofile-opentracing-api</artifactId>
+      <version>1.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.opentracing</groupId>
+      <artifactId>opentracing-api</artifactId>
+      <version>0.31.0</version>
+    </dependency>
 		<!-- Configure javametrics monitoring Dependencies -->
 		<dependency>
 			<groupId>com.ibm.runtimetools</groupId>
